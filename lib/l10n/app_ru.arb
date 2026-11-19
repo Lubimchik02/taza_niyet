@@ -1,0 +1,933 @@
+{
+  "@@locale": "ru",
+  "tabHome": "Главная",
+  "tabMap": "Карта",
+  "tabChats": "Чаты",
+  "tabProfile": "Профиль",
+  "retry": "Повторить",
+  "back": "Назад",
+  "done": "Готово",
+  "emptyQuestsTitle": "Пока нет записей",
+  "emptyQuestsBody": "Найдите квест рядом и запишитесь в команду",
+  "findQuest": "Найти квест",
+  "mapTitle": "Карта квестов",
+  "emptyChatsTitle": "Пока нет чатов",
+  "emptyChatsBody": "Чат команды появится, когда вы запишетесь на квест",
+  "stageSoon": "Экран появится на этапе {stage}",
+  "@stageSoon": {
+    "placeholders": {
+      "stage": {
+        "type": "int"
+      }
+    }
+  },
+  "errorNetworkTitle": "Нет подключения",
+  "errorNetworkBody": "Проверьте интернет и попробуйте ещё раз",
+  "offlineBanner": "Нет сети — показываем сохранённое",
+  "designSystem": "Дизайн-система",
+  "designSystemSub": "Все компоненты и состояния",
+  "theme": "Тема",
+  "themeSystem": "Как в системе",
+  "themeLight": "Светлая",
+  "themeDark": "Тёмная",
+  "language": "Язык",
+  "hoursShort": "{hours} ч",
+  "@hoursShort": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "tzSemantics": "{amount} баллов Tz",
+  "@tzSemantics": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
+  "emailInvalid": "Проверьте адрес: в нём нет «@»",
+  "skip": "Пропустить",
+  "next": "Далее",
+  "start": "Начать",
+  "ob1Title": "Квесты рядом с домом",
+  "ob1Body": "Открой карту и выбери, где помочь городу: уборка, посадка деревьев, приюты",
+  "ob2Title": "Вместе с командой",
+  "ob2Body": "Запишись в команду старшего волонтёра, позови друзей и договорись обо всём в чате",
+  "ob3Title": "Каждый час засчитан",
+  "ob3Body": "Часы подтверждает организация. Они попадают в портфолио с QR, а за каждый час — 5 баллов Tz",
+  "obPage": "Слайд {n} из 3",
+  "authTitle": "Вход и регистрация",
+  "demoContinue": "Продолжить без входа (демо)",
+  "replayOnboarding": "Показать заставку и онбординг снова",
+  "@obPage": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "authWelcomeTitle": "Войдите, чтобы начать",
+  "authWelcomeBody": "Часы и баллы сохранятся в вашем профиле",
+  "withApple": "Войти через Apple",
+  "withGoogle": "Войти через Google",
+  "withPasskey": "Войти по ключу доступа",
+  "withEmailPhone": "Email или телефон",
+  "orWord": "или",
+  "legal": "Продолжая, вы принимаете Условия использования и Политику конфиденциальности",
+  "cantSignIn": "Не могу войти",
+  "emailLabel": "Email",
+  "phoneLabel": "Телефон",
+  "getCode": "Получить код",
+  "errEmail": "Проверьте адрес: в нём нет «@» или домена",
+  "errPhone": "Введите казахстанский номер: +7 7XX XXX XX XX",
+  "otpTitle": "Введите код",
+  "otpSentTo": "Отправили 6 цифр на {target}",
+  "@otpSentTo": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "resendIn": "Отправить снова через {sec} с",
+  "@resendIn": {
+    "placeholders": {
+      "sec": {
+        "type": "int"
+      }
+    }
+  },
+  "resend": "Отправить код снова",
+  "changeTarget": "Изменить email или номер",
+  "errWrongCode": "Неверный код. Осталось попыток: {n}",
+  "@errWrongCode": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "errCodeExpired": "Код устарел — запросите новый",
+  "errTooMany": "Слишком много попыток. Попробуйте через 15 минут",
+  "errRate": "Слишком часто. Подождите минуту и попробуйте снова",
+  "errCancelled": "Вход отменён",
+  "errUnknown": "Что-то пошло не так. Попробуйте ещё раз",
+  "twoFaTitle": "Подтвердите вход",
+  "twoFaBody": "Введите 6 цифр из приложения-аутентификатора",
+  "useBackupCode": "Использовать резервный код",
+  "backupCode": "Резервный код",
+  "confirm": "Подтвердить",
+  "profileTitle": "Расскажите о себе",
+  "profileBody": "Имя увидят ваша команда и друзья",
+  "nameLabel": "Имя и фамилия",
+  "errName": "Введите имя — хотя бы 2 буквы",
+  "birthYear": "Год рождения",
+  "birthYearHint": "Нужен для настроек приватности. Его никто не увидит",
+  "minorNote": "Вам меньше 18 — ваши часы по умолчанию увидят только друзья",
+  "errYear": "Выберите год рождения",
+  "continueAction": "Продолжить",
+  "recoveryTitle": "Восстановление доступа",
+  "recoveryBody": "Выберите, как подтвердить, что аккаунт ваш",
+  "recEmail": "Код на запасной email",
+  "recPhone": "Код по СМС",
+  "recSupport": "Написать в поддержку",
+  "recSupportBody": "Ответим в течение дня",
+  "orgTitle": "Выберите организацию",
+  "orgBody": "Часы и достижения подтверждает организация",
+  "locWhyTitle": "Показать организации рядом?",
+  "locWhyBody": "Местоположение нужно только чтобы отсортировать список по расстоянию. Мы его не сохраняем",
+  "locAllow": "Разрешить",
+  "locManual": "Выбрать город",
+  "locDenied": "Доступ к местоположению выключен — выберите город",
+  "segNearby": "Рядом",
+  "segCity": "Мой город",
+  "segAll": "Все",
+  "orgSearch": "Поиск по названию",
+  "join": "Вступить",
+  "kmAway": "{km} км",
+  "@kmAway": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "members": "{n} волонтёров",
+  "@members": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "verified": "Проверена",
+  "noNearby": "Рядом нет организаций",
+  "noNearbyBody": "Посмотрите все организации вашего города",
+  "noResults": "Ничего не нашли по запросу «{q}»",
+  "@noResults": {
+    "placeholders": {
+      "q": {
+        "type": "String"
+      }
+    }
+  },
+  "haveCode": "У меня есть код приглашения",
+  "codeTitle": "Код приглашения",
+  "codeHint": "Код даёт координатор организации",
+  "errCode": "Код не найден. Проверьте буквы и цифры",
+  "pendingTitle": "Заявка отправлена",
+  "pendingBody": "{org} рассмотрит заявку. Мы пришлём уведомление, когда координатор ответит",
+  "@pendingBody": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "browseMeanwhile": "Пока посмотреть приложение",
+  "cancelRequest": "Отменить заявку",
+  "approvedToast": "{org} приняла вас! Часы будут начисляться сюда",
+  "@approvedToast": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "rejectedTitle": "Заявку отклонили",
+  "rejectedBody": "{org} сейчас не принимает новых волонтёров. Выберите другую организацию",
+  "@rejectedBody": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseAnother": "Выбрать другую",
+  "orgPendingBanner": "Заявка в {org} на рассмотрении",
+  "@orgPendingBanner": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "changeOrg": "Сменить организацию",
+  "cityLabel": "Город",
+  "typeEcology": "Экология · уборка города",
+  "typeAnimals": "Приют для животных",
+  "typeSocial": "Социальная помощь",
+  "typeGreening": "Озеленение города",
+  "typeYouth": "Молодёжное волонтёрство",
+  "typeSports": "Спорт и городские события",
+  "quests": "Квесты",
+  "viewMap": "Карта",
+  "viewList": "Список",
+  "fToday": "Сегодня",
+  "fWeek": "Эта неделя",
+  "fEasy": "Лёгкие",
+  "fMedium": "Средние",
+  "fHard": "Сложные",
+  "fNear": "До 3 км",
+  "diffEasy": "Лёгкий",
+  "diffMedium": "Средний",
+  "diffHard": "Сложный",
+  "spotsLeft": "Свободно {n} из {total}",
+  "@spotsLeft": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "questFull": "Мест нет — лист ожидания",
+  "details": "Подробнее",
+  "noQuestsTitle": "Квестов по фильтрам нет",
+  "noQuestsBody": "Уберите часть фильтров или загляните позже",
+  "resetFilters": "Сбросить фильтры",
+  "locMapTitle": "Показать квесты рядом с вами?",
+  "locMapBody": "Местоположение нужно, чтобы показать расстояние до квестов. Мы его не сохраняем",
+  "notNow": "Не сейчас",
+  "myLocation": "Моё место",
+  "upToTz": "до +{n} Tz",
+  "@upToTz": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "questsCount": "Квестов: {n}",
+  "@questsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "pendingJoinNote": "Записаться можно после одобрения заявки в {org}",
+  "@pendingJoinNote": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "zoomIn": "Приблизить",
+  "zoomOut": "Отдалить",
+  "guideTitle": "Как стать волонтёром",
+  "guideLead": "5 шагов — и ваши добрые дела засчитаны",
+  "g1T": "Вступите в организацию",
+  "g1B": "Она подтверждает ваши часы. Выберите рядом с домом или введите код от координатора",
+  "g2T": "Найдите квест на карте",
+  "g2B": "Уборка, посадка деревьев, помощь приютам. Смотрите дату, место и сложность",
+  "g3T": "Запишитесь в команду",
+  "g3B": "Команду ведёт старший волонтёр. Договоритесь обо всём в чате команды",
+  "g4T": "На месте нажмите «Я на месте»",
+  "g4B": "Одно касание в начале. В конце старший закроет смену за всех",
+  "g5T": "Получите часы и баллы",
+  "g5B": "Координатор подтвердит часы: 1 час = 5 баллов Tz. Часы попадут в портфолио с QR",
+  "rulesTitle": "Важно",
+  "rule1": "Берите воду и удобную одежду, слушайте старшего волонтёра",
+  "rule2": "Если вам нет 18 — предупредите родителей, куда идёте",
+  "rule3": "Что-то пошло не так — напишите старшему в чате команды",
+  "guideDone": "Понятно — выбрать организацию",
+  "later": "Позже",
+  "guideCardT": "Как это работает",
+  "guideCardB": "5 простых шагов — 1 минута чтения",
+  "orgCardB": "Без неё можно смотреть квесты, но записаться и получить часы нельзя",
+  "choose": "Выбрать",
+  "guideIcon": "Инструкция",
+  "noOrgMapNote": "Чтобы записаться, вступите в организацию",
+  "locSetupTitle": "Где вы находитесь?",
+  "locSetupBody": "Покажем квесты и организации рядом с вами. Местоположение берём только когда приложение открыто и не сохраняем",
+  "gotIt": "Понятно",
+  "teamN": "Команда {n}",
+  "@teamN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "seniorLabel": "Старший: {name}",
+  "@seniorLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "teamsTitle": "Команды",
+  "aboutQuest": "О квесте",
+  "whenLabel": "Когда",
+  "whereLabel": "Где",
+  "signUp": "Записаться",
+  "joinWaitlist": "Встать в лист ожидания",
+  "youJoined": "Вы записаны",
+  "youJoinedTeam": "{team} · старший {name}",
+  "@youJoinedTeam": {
+    "placeholders": {
+      "team": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "waitlistPos": "Вы в листе ожидания: №{n}",
+  "@waitlistPos": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "waitlistHint": "Если кто-то отменит запись, место перейдёт вам — пришлём уведомление",
+  "leaveWaitlist": "Выйти из листа ожидания",
+  "cancelSignup": "Отменить запись",
+  "cancelConfirmT": "Отменить запись?",
+  "cancelConfirmB": "Место освободится для другого волонтёра",
+  "lateCancelWarn": "До начала меньше суток — старший увидит позднюю отмену",
+  "keep": "Оставить",
+  "inviteFriends": "Пригласить друзей",
+  "inviteText": "Пойдём со мной на квест «{title}» — {when}. Taza Niyet: {link}",
+  "@inviteText": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      },
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "joinedToast": "Вы записаны! Старший добавит вас в чат команды",
+  "errTimeConflict": "В это время у вас уже есть квест",
+  "errAlreadySigned": "Вы уже записаны на этот квест",
+  "joinOrgToSignUp": "Вступить в организацию",
+  "otherOrgNote": "Записаться могут волонтёры {org}",
+  "@otherOrgNote": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "confirmJoinT": "Подтвердите запись",
+  "minorJoinNote": "Вам нет 18 — расскажите родителям, куда и когда идёте",
+  "mySignups": "Мои записи",
+  "teamFull": "Мест нет",
+  "questNotFound": "Квест не найден",
+  "questNotFoundB": "Возможно, его отменили или ссылка устарела",
+  "waitlistChip": "Лист ожидания №{n}",
+  "@waitlistChip": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "imHere": "Я на месте",
+  "checkInSoon": "Кнопка «Я на месте» появится за 30 минут до начала",
+  "checkedInAt": "Вы на месте с {time}",
+  "@checkedInAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "geoOk": "Геометка подтверждена",
+  "geoManual": "Без геометки — подтвердит старший",
+  "tooFarT": "Вы в {km} км от места",
+  "@tooFarT": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "tooFarB": "Подойдите ближе — до 300 м. Если вы уже на месте, отметьтесь без геометки: старший подтвердит",
+  "markAnyway": "Отметиться без геометки",
+  "locNeededT": "Нужна геолокация",
+  "locNeededB": "Так мы проверим, что вы на месте. Берём местоположение один раз и не храним",
+  "shiftBySenior": "В конце смену закроет старший",
+  "shiftReported": "Смена закрыта: {hours} — ждём подтверждения координатора",
+  "@shiftReported": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "shiftApproved": "Засчитано: {hours} · +{tz} Tz",
+  "@shiftApproved": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "tz": {
+        "type": "int"
+      }
+    }
+  },
+  "shiftMissed": "Вы не отмечены на смене. Если это ошибка — напишите старшему",
+  "shiftEnded": "Смена закончилась",
+  "hoursStr": "{h} ч",
+  "@hoursStr": {
+    "placeholders": {
+      "h": {
+        "type": "String"
+      }
+    }
+  },
+  "seniorMode": "Режим старшего (демо)",
+  "seniorModeSub": "Показать экраны старшего волонтёра",
+  "youAreSenior": "Вы старший команды {n}",
+  "@youAreSenior": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "openRoster": "Список команды",
+  "rosterHint": "Отметьте, кто пришёл. Значок геометки — отметился сам, рука — отметили вы",
+  "presentCount": "На месте: {n} из {total}",
+  "@presentCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "markedBySenior": "Отмечен старшим",
+  "markedGeo": "Отметился сам",
+  "notArrived": "Не отмечен",
+  "editHoursT": "Сколько часов засчитать?",
+  "editHoursB": "Не больше длительности квеста — {h}",
+  "@editHoursB": {
+    "placeholders": {
+      "h": {
+        "type": "String"
+      }
+    }
+  },
+  "closeShift": "Закрыть смену",
+  "closeShiftT": "Закрыть смену?",
+  "closeShiftSummary": "На месте: {present}, не пришли: {absent}. Всего {hours}",
+  "@closeShiftSummary": {
+    "placeholders": {
+      "present": {
+        "type": "int"
+      },
+      "absent": {
+        "type": "int"
+      },
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "closeShiftNote": "Координатор проверит отметки и часы. За точный учёт — +10 Tz вам; за ошибки баллы могут сняться",
+  "manualMarksNote": "Ручных отметок: {n} — координатор увидит их отдельно",
+  "@manualMarksNote": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "shiftSent": "Смена отправлена координатору",
+  "shiftApprovedSenior": "Координатор подтвердил смену · +10 Tz вам за учёт",
+  "myHours": "Мои часы",
+  "hoursTotal": "{hours} · {tz} Tz",
+  "@hoursTotal": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "tz": {
+        "type": "int"
+      }
+    }
+  },
+  "demoShiftNow": "Демо: начать смену сейчас",
+  "demoSeniorClosed": "Демо: старший закрыл смену",
+  "youLabel": "Вы",
+  "minorTag": "до 18",
+  "chatSearch": "Поиск по чатам",
+  "channelLabel": "Канал организации",
+  "teamChatLabel": "Чат команды · {team}",
+  "@teamChatLabel": {
+    "placeholders": {
+      "team": {
+        "type": "String"
+      }
+    }
+  },
+  "directLabel": "Друг",
+  "readOnlyNote": "Писать в канал может только координатор",
+  "messageHint": "Сообщение",
+  "sendAction": "Отправить",
+  "failedRetry": "Не отправлено. Нажмите, чтобы повторить",
+  "copyAction": "Копировать",
+  "copied": "Скопировано",
+  "reportAction": "Пожаловаться",
+  "reportT": "На что жалуетесь?",
+  "reasonSpam": "Спам или реклама",
+  "reasonInsult": "Оскорбления или травля",
+  "reasonInappropriate": "Неприемлемый контент",
+  "reasonDanger": "Угроза или опасность",
+  "reasonOther": "Другое",
+  "reportSent": "Жалоба отправлена. Модератор проверит её в течение суток",
+  "blockAction": "Заблокировать",
+  "blockT": "Заблокировать {name}?",
+  "@blockT": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "blockB": "Он не сможет писать вам, а его сообщения скроются. Разблокировать можно в любой момент",
+  "blockedNote": "Вы заблокировали этого пользователя",
+  "unblockAction": "Разблокировать",
+  "muteAction": "Без звука",
+  "unmuteAction": "Включить звук",
+  "membersN": "Участников: {n}",
+  "@membersN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "seniorTag": "старший",
+  "coordinatorTag": "координатор",
+  "systemAdded": "Вы в чате команды. Здесь старший расскажет, где встречаемся",
+  "todayLabel": "Сегодня",
+  "yesterdayLabel": "Вчера",
+  "youPrefix": "Вы: {text}",
+  "@youPrefix": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "openQuest": "Открыть квест",
+  "chatSafetyNote": "Не делитесь адресом, паролями и кодами из СМС. Подозрительное — сразу «Пожаловаться»",
+  "profileHours": "Часы",
+  "profileTz": "Баллы Tz",
+  "profileShifts": "Смены",
+  "portfolioTitle": "Портфолио волонтёра",
+  "portfolioCardB": "Подтверждённые часы с QR — для школы, вуза или работодателя",
+  "achievementsTitle": "Достижения",
+  "historyTitle": "История смен",
+  "noHistoryT": "Пока нет подтверждённых часов",
+  "noHistoryB": "Запишитесь на квест — часы появятся после смены",
+  "achFirst": "Первая смена",
+  "achShifts3": "Три смены",
+  "achShifts5": "Командный игрок",
+  "achH10": "10 часов",
+  "achH50": "50 часов",
+  "achSenior": "Старший",
+  "achProgress": "{cur} из {target}",
+  "@achProgress": {
+    "placeholders": {
+      "cur": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "achDone": "Получено",
+  "visibilityTitle": "Кто видит мои часы",
+  "visAll": "Все",
+  "visFriends": "Только друзья",
+  "visMe": "Только я",
+  "visMinorNote": "До 18 лет часы могут видеть только друзья",
+  "verifyTitle": "Проверка подлинности",
+  "verifyBody": "Отсканируйте QR или откройте ссылку — откроется страница с подтверждёнными часами. Номер: {code}",
+  "@verifyBody": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "shareLink": "Поделиться ссылкой",
+  "issuedBy": "Подтвердила {org}",
+  "@issuedBy": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "awaitingCoordinator": "Ждёт подтверждения",
+  "seniorBonusLabel": "Бонус старшему за учёт",
+  "portfolioShareText": "Моё волонтёрское портфолио Taza Niyet: {hours}, {tz} Tz. Проверка: {link}",
+  "@portfolioShareText": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "tz": {
+        "type": "int"
+      },
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "openPortfolio": "Открыть портфолио",
+  "settingsShort": "Настройки профиля",
+  "searchPeople": "Найти волонтёра",
+  "searchMin": "Введите хотя бы 2 буквы имени",
+  "hoursHidden": "Часы скрыты",
+  "addFriend": "Добавить в друзья",
+  "requestSent": "Заявка отправлена",
+  "friendsLabel": "В друзьях",
+  "writeMessage": "Написать",
+  "removeFriend": "Удалить из друзей",
+  "friendRequestsT": "Заявки в друзья",
+  "acceptAction": "Принять",
+  "declineAction": "Отклонить",
+  "friendAdded": "{name} теперь в друзьях",
+  "@friendAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ratingTitle": "Рейтинг месяца",
+  "ratingOrg": "Организация",
+  "ratingCity": "Город",
+  "ratingAll": "Весь рейтинг",
+  "ratingPlace": "Вы на {n}-м месте",
+  "@ratingPlace": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ratingEmpty": "Вступите в организацию, чтобы попасть в рейтинг",
+  "ratingNote": "Только подтверждённые часы за этот месяц. Кто скрыл часы — не показывается",
+  "feedTitle": "Новости",
+  "feedShift": "{name} — {hours} на «{quest}»",
+  "@feedShift": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "hours": {
+        "type": "String"
+      },
+      "quest": {
+        "type": "String"
+      }
+    }
+  },
+  "feedNewQuest": "Новый квест от {org}: «{quest}»",
+  "@feedNewQuest": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      },
+      "quest": {
+        "type": "String"
+      }
+    }
+  },
+  "feedAchievement": "{name} — достижение «{ach}»",
+  "@feedAchievement": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "ach": {
+        "type": "String"
+      }
+    }
+  },
+  "feedMine": "Вам засчитано {hours} за «{quest}»",
+  "@feedMine": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "quest": {
+        "type": "String"
+      }
+    }
+  },
+  "minorProfileNote": "Профиль до 18 лет — часы видят только друзья",
+  "monthHours": "{hours} за месяц",
+  "@monthHours": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "friendsCount": "Друзья: {n}",
+  "@friendsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "agoMin": "{n} мин назад",
+  "@agoMin": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "agoHours": "{n} ч назад",
+  "@agoHours": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "agoDays": "{n} дн назад",
+  "@agoDays": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Настройки",
+  "secAccount": "Аккаунт",
+  "secSecurity": "Безопасность и вход",
+  "secNotifications": "Уведомления",
+  "secPrivacy": "Приватность",
+  "secAppearance": "Язык и оформление",
+  "secA11y": "Доступность",
+  "secData": "Мои данные",
+  "secDelete": "Удаление аккаунта",
+  "secAbout": "О приложении и помощь",
+  "nameEdit": "Изменить имя",
+  "birthYearLocked": "Год рождения меняется только через поддержку — от него зависят правила для младше 18",
+  "signInWith": "Вход",
+  "signOutAction": "Выйти",
+  "signOutAll": "Выйти на всех устройствах",
+  "twoFa": "Двухфакторная защита",
+  "twoFaSub": "Код из приложения-аутентификатора при входе",
+  "backupCodesT": "Резервные коды",
+  "backupCodesB": "Сохраните их — каждый можно использовать один раз, если нет доступа к аутентификатору",
+  "passkeys": "Ключи доступа (passkey)",
+  "passkeyAdd": "Добавить ключ доступа",
+  "passkeyAdded": "Ключ доступа добавлен",
+  "sessionsT": "Активные сеансы",
+  "thisDevice": "Это устройство",
+  "endSession": "Завершить",
+  "endOthers": "Завершить все другие сеансы",
+  "sessionsEnded": "Другие сеансы завершены",
+  "nShifts": "Напоминания о сменах",
+  "nShiftsSub": "За день и за час до начала",
+  "nChats": "Сообщения в чатах",
+  "nQuests": "Новые квесты организации",
+  "nFriends": "Заявки в друзья",
+  "nHours": "Подтверждение часов",
+  "nNews": "Новости и советы",
+  "quietHours": "Тихие часы 22:00–08:00",
+  "quietHoursSub": "Без звука ночью, кроме напоминаний о смене",
+  "whoCanAdd": "Кто может добавить меня в друзья",
+  "addEveryone": "Все",
+  "addMyOrg": "Только из моей организации",
+  "addNobody": "Никто",
+  "showInSearch": "Показывать меня в поиске",
+  "showInRating": "Участвовать в рейтинге",
+  "blockedUsers": "Заблокированные",
+  "noBlocked": "Никого нет",
+  "minorPrivacyNote": "До 18 лет: в поиске видны только имя и организация, писать могут только друзья",
+  "langSystem": "Как в системе",
+  "textSize": "Размер текста",
+  "textSizeSample": "Так будет выглядеть текст в приложении",
+  "reduceMotion": "Меньше анимации",
+  "reduceMotionSub": "Короткая заставка, без движения при переходах",
+  "hapticsSetting": "Вибрация при нажатиях",
+  "exportData": "Скачать мои данные",
+  "exportDataSub": "Профиль, часы, записи, друзья — файл JSON",
+  "exportPdf": "Портфолио в PDF",
+  "exportPdfSub": "Для школы, вуза или работодателя, с QR для проверки",
+  "exportReady": "Файл готов",
+  "deleteT": "Удалить аккаунт?",
+  "deleteB1": "Удалятся профиль, друзья, переписка и настройки",
+  "deleteB2": "Подтверждённые часы останутся в отчётах организаций без вашего имени",
+  "deleteB3": "30 дней можно передумать — просто войдите снова",
+  "deleteTip": "Перед удалением скачайте портфолио — потом его не восстановить",
+  "deleteTypeHint": "Введите УДАЛИТЬ для подтверждения",
+  "deleteWord": "УДАЛИТЬ",
+  "deleteAction": "Удалить аккаунт",
+  "deleteDone": "Аккаунт будет удалён через 30 дней",
+  "versionLabel": "Версия {v}",
+  "@versionLabel": {
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "privacyPolicy": "Политика конфиденциальности",
+  "terms": "Условия использования",
+  "licenses": "Лицензии",
+  "support": "Написать в поддержку",
+  "rateApp": "Оценить приложение",
+  "onOff": "Вкл",
+  "offLabel": "Выкл",
+  "pushLater": "Уведомления начнут приходить после подключения сервера",
+  "pdfDate": "Дата",
+  "pdfQuest": "Квест",
+  "pdfIssued": "Сформировано",
+  "notifCenter": "Уведомления",
+  "notifEmptyT": "Пока тихо",
+  "notifEmptyB": "Здесь появятся напоминания о сменах, подтверждения часов и заявки в друзья",
+  "markAllRead": "Прочитать все",
+  "nfApprovedT": "Часы подтверждены: +{tz} Tz",
+  "@nfApprovedT": {
+    "placeholders": {
+      "tz": {
+        "type": "int"
+      }
+    }
+  },
+  "nfReminderDay": "Завтра смена: «{quest}»",
+  "@nfReminderDay": {
+    "placeholders": {
+      "quest": {
+        "type": "String"
+      }
+    }
+  },
+  "nfReminderHour": "Через час: «{quest}». На месте нажмите «Я на месте»",
+  "@nfReminderHour": {
+    "placeholders": {
+      "quest": {
+        "type": "String"
+      }
+    }
+  },
+  "pushAskT": "Напомнить о смене?",
+  "pushAskB": "Пришлём напоминание за день и за час до начала и сообщим, когда подтвердят часы. Без рекламы",
+  "cachedData": "Нет сети — показаны сохранённые данные",
+  "queuedCheckIn": "Отметка сохранена — отправим, когда появится сеть",
+  "queuedMessage": "Отправится, когда появится сеть",
+  "syncDone": "Сеть появилась — всё отправлено",
+  "updateRequiredT": "Нужно обновить приложение",
+  "updateRequiredB": "Эта версия больше не поддерживается. Обновление займёт минуту — часы и данные сохранятся",
+  "updateAction": "Обновить",
+  "updateSoft": "Доступна новая версия",
+  "verifyPageT": "Проверка портфолио",
+  "verifyValid": "Портфолио подлинное",
+  "verifyInvalid": "Портфолио не найдено или отозвано",
+  "verifyChecked": "Проверено {date}",
+  "@verifyChecked": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "devPanel": "Для разработчика (демо)",
+  "devOffline": "Нет сети",
+  "devForceUpdate": "Старая версия — нужно обновление",
+  "devSoftUpdate": "Есть новая версия",
+  "devFlags": "Функции (feature flags)",
+  "flagChats": "Чаты",
+  "flagRating": "Рейтинг",
+  "flagFeed": "Лента",
+  "devLink": "Открыть ссылку",
+  "devPush": "Прислать тестовое уведомление",
+  "linkInvalid": "Ссылка не распознана",
+  "featureOff": "Функция временно выключена",
+  "consentText": "Я согласен(на) на сбор и обработку моих персональных данных для участия в волонтёрстве",
+  "consentMinor": "Если вам нет 18 лет, прочитайте условия вместе с родителями",
+  "consentRequired": "Без согласия мы не можем создать профиль",
+  "minAgeNote": "Taza Niyet — для тех, кому уже есть 13 лет"
+}

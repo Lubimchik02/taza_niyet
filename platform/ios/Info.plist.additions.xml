@@ -1,0 +1,17 @@
+<!-- Добавить в ios/Runner/Info.plist внутрь <dict>. -->
+<key>CFBundleDisplayName</key><string>Taza Niyet</string>
+<key>CFBundleLocalizations</key><array><string>kk</string><string>ru</string><string>en</string></array>
+<key>CFBundleDevelopmentRegion</key><string>ru</string>
+<!-- Текст запроса местоположения (переводы — в *.lproj/InfoPlist.strings). -->
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Чтобы показать квесты рядом и проверить отметку «Я на месте». Местоположение берём только когда приложение открыто и не храним.</string>
+<!-- Пуши. -->
+<key>UIBackgroundModes</key><array><string>remote-notification</string></array>
+<!-- Ссылки tazaniyet.kz → go_router. -->
+<key>FlutterDeepLinkingEnabled</key><true/>
+<!-- Возврат после входа через Apple/Google. -->
+<key>CFBundleURLTypes</key>
+<array><dict><key>CFBundleURLSchemes</key><array><string>kz.tazaniyet.app</string></array></dict></array>
+<!-- Только стандартное шифрование HTTPS — экспортная декларация не нужна. -->
+<key>ITSAppUsesNonExemptEncryption</key><false/>
+<!-- Только iPhone (без iPad): тогда не нужны скриншоты iPad 13". В Xcode: Targeted Device Families = iPhone. -->

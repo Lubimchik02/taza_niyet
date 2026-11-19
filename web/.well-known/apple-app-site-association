@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["ЗАМЕНИТЕ_TEAMID.kz.tazaniyet.app"],
+        "components": [
+          { "/": "/q/*", "comment": "Квест" },
+          { "/": "/v/*", "comment": "Проверка портфолио" },
+          { "/": "/u/*", "comment": "Профиль волонтёра" },
+          { "/": "/join/*", "comment": "Приглашение в организацию" }
+        ]
+      }
+    ]
+  }
+}

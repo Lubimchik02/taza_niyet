@@ -1,0 +1,42 @@
+// android/app/build.gradle.kts — ключевые настройки выпуска.
+import java.util.Properties
+import java.io.FileInputStream
+
+val keystoreProperties = Properties().apply {
+    val f = rootProject.file("key.properties")      // НЕ коммитить: пароли от ключа подписи
+    if (f.exists()) load(FileInputStream(f))
+}
+
+android {
+    namespace = "kz.tazaniyet.app"
+    compileSdk = 36
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true   // нужно flutter_local_notifications
+    }
+    defaultConfig {
+        applicationId = "kz.tazaniyet.app"
+        minSdk = 24
+        targetSdk = 36            // Google Play: новые приложения и обновления — API 36 с 31.08.2026
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String?
+            keyPassword = keystoreProperties["keyPassword"] as String?
+            storeFile = (keystoreProperties["storeFile"] as String?)?.let { file(it) }
+            storePassword = keystoreProperties["storePassword"] as String?
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isShrinkResources = true
+        }
+    }
+}
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+}
+// + плагин com.google.gms.google-services и файл android/app/google-services.json (Firebase, пуши).

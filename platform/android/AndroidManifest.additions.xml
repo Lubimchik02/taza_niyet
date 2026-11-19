@@ -1,0 +1,35 @@
+<!-- Добавить в android/app/src/main/AndroidManifest.xml (после `flutter create`). -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- «Я на месте»: точное местоположение только во время использования (без фонового доступа). -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Android 13+: разрешение на уведомления (спрашиваем после мягкого вопроса). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Напоминания о смене переживают перезагрузку телефона. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application android:label="Taza Niyet" android:icon="@mipmap/ic_launcher" android:allowBackup="false">
+        <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTask">
+            <!-- Ссылки tazaniyet.kz открываются в приложении (нужен assetlinks.json на сайте). -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="tazaniyet.kz" android:pathPrefix="/q/" />
+                <data android:scheme="https" android:host="tazaniyet.kz" android:pathPrefix="/v/" />
+                <data android:scheme="https" android:host="tazaniyet.kz" android:pathPrefix="/u/" />
+                <data android:scheme="https" android:host="tazaniyet.kz" android:pathPrefix="/join/" />
+            </intent-filter>
+            <!-- Возврат после входа через Apple/Google (Supabase OAuth). -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="kz.tazaniyet.app" android:host="login-callback" />
+            </intent-filter>
+        </activity>
+        <!-- Канал уведомлений по умолчанию для FCM. -->
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="shifts" />
+    </application>
+</manifest>

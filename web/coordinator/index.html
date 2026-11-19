@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taza Niyet — кабинет координатора</title>
+<!-- Подключение к серверу: впишите адрес проекта Supabase и публичный ключ anon. Пусто — демо-режим. -->
+<meta name="tn-supabase-url" content="">
+<meta name="tn-supabase-anon" content="">
+<style>
+:root{--bg:#F4F7EC;--surface:#fff;--s2:#EEF3E3;--outline:#E2E9D5;--text:#1D2A10;--t2:#5E6E4C;--pr:#8CC914;--onpr:#1F3300;--prs:#3D6B00;--lime:#DDFF99;--danger:#B3261E;--warn:#8A5A00;--warnbg:#FFF1D6;--r:18px;--fast:150ms;--ease:cubic-bezier(.2,0,0,1)}
+.dark{--bg:#10160B;--surface:#182112;--s2:#222D1A;--outline:#2E3A24;--text:#E8F0DC;--t2:#A3B293;--pr:#A6E22E;--onpr:#1A2B00;--prs:#A6E22E;--lime:#34461C;--danger:#FF8A80;--warn:#FFC266;--warnbg:#3A2E12}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font:16px/1.45 Manrope,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--pr);outline-offset:2px;border-radius:8px}
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+aside{background:var(--surface);border-right:1px solid var(--outline);padding:20px 12px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 18px}.brand svg{width:34px;height:34px;color:var(--pr)}.brand b{font-size:19px;font-weight:800}.brand small{display:block;color:var(--t2);font-size:12px;font-weight:600}
+.nav{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:12px;background:none;cursor:pointer;font-weight:600;color:var(--t2);text-align:left}
+.nav:hover{background:var(--s2)}.nav[aria-current=page]{background:var(--lime);color:var(--text)}.nav .cnt{margin-left:auto;min-width:22px;height:22px;padding:0 7px;border-radius:11px;background:var(--danger);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center}
+.nav svg,.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:8px;padding:8px}
+main{padding:28px 32px 64px;max-width:1120px;width:100%}
+h1{font-size:28px;margin:0 0 4px;font-weight:800}h2{font-size:20px;margin:28px 0 12px}h3{margin:0;font-size:17px}
+.lead{color:var(--t2);margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--outline);border-radius:var(--r);padding:16px}
+.stat{cursor:pointer;text-align:left;width:100%}.stat:hover{border-color:var(--pr)}.stat b{display:block;font-size:32px;font-weight:800;color:var(--prs)}.stat span{color:var(--t2);font-weight:600;font-size:14px}.stat.alert b{color:var(--danger)}
+.row{display:flex;align-items:center;gap:12px}.wrap{flex-wrap:wrap}.grow{flex:1;min-width:0}.t2{color:var(--t2)}.sm{font-size:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;font-weight:700;white-space:nowrap;transition:transform var(--fast) var(--ease)}
+.btn:active{transform:scale(.98)}.btn:disabled{opacity:.38;cursor:default}
+.p{background:var(--pr);color:var(--onpr)}.s{background:var(--s2)}.g{background:none;color:var(--prs)}.d{background:none;color:var(--danger);box-shadow:inset 0 0 0 1.5px var(--danger)}
+.list{display:flex;flex-direction:column;gap:8px}
+.item{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.av{width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--prs);display:grid;place-items:center;font-weight:800;flex:none}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--s2);color:var(--t2)}
+.badge.minor{background:#E8EEFF;color:#2B4AA8}.dark .badge.minor{background:#1E2A4A;color:#AFC3FF}.badge.warn{background:var(--warnbg);color:var(--warn)}.badge.ok{background:var(--lime);color:var(--prs)}.badge.bad{background:#FDE7E5;color:var(--danger)}.dark .badge.bad{background:#3B1A18}
+table{width:100%;border-collapse:collapse;font-size:15px}th{text-align:left;font-size:13px;color:var(--t2);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--outline)}td{padding:10px;border-bottom:1px solid var(--outline);vertical-align:middle}tr.manual td{background:var(--warnbg)}tr.absent td{color:var(--t2)}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}.fld input,.fld select,.fld textarea{min-height:44px;border:1.5px solid var(--outline);border-radius:12px;background:var(--surface);padding:10px 12px;font-weight:500}.fld textarea{min-height:96px;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--pr);outline:none}
+.form{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}.form .full{grid-column:1/-1}
+.seg{display:inline-flex;background:var(--s2);border-radius:999px;padding:4px;gap:4px}.seg button{border:0;background:none;border-radius:999px;min-height:36px;padding:0 14px;font-weight:700;color:var(--t2);cursor:pointer}.seg button[aria-pressed=true]{background:var(--surface);color:var(--text);box-shadow:0 1px 3px #0002}
+.empty{text-align:center;padding:40px 16px;color:var(--t2)}.empty svg{width:44px;height:44px;color:var(--pr);margin-bottom:8px}
+.code{font:800 26px/1 ui-monospace,Menlo,monospace;letter-spacing:3px}
+.demo{background:var(--warnbg);color:var(--warn);padding:10px 16px;border-radius:12px;font-size:14px;font-weight:600;margin-bottom:20px}
+.back{border:0;background:none;color:var(--prs);font-weight:700;cursor:pointer;padding:0;margin-bottom:12px;display:inline-flex;gap:6px;align-items:center}
+dialog{border:0;border-radius:24px;padding:24px;max-width:640px;width:calc(100% - 32px);background:var(--surface);color:var(--text);box-shadow:0 20px 60px #0004}dialog::backdrop{background:#0007}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(calc(100% + 40px));opacity:0;background:var(--text);color:var(--bg);padding:12px 20px;border-radius:14px;font-weight:600;transition:transform 250ms var(--ease);z-index:99;max-width:90vw}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.login{max-width:400px;margin:12vh auto;padding:0 16px}
+.sel{min-height:36px;border:1.5px solid var(--outline);border-radius:10px;background:var(--surface);padding:0 8px}
+.msg{white-space:pre-wrap;background:var(--s2);border-radius:12px;padding:10px 12px;margin-top:8px;font-size:14px}
+@media (max-width:820px){.app{grid-template-columns:1fr}aside{position:static;height:auto;flex-direction:row;overflow-x:auto;padding:8px;gap:4px;border-right:0;border-bottom:1px solid var(--outline)}.brand,.side-foot{display:none}.nav{white-space:nowrap;width:auto}main{padding:20px 16px 64px}.item .grow{flex-basis:calc(100% - 60px)}.badge{white-space:nowrap}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+/* =========================================================================================
+   Taza Niyet — веб-кабинет координатора.
+   Работает с теми же функциями сервера, что и приложение (supabase/migrations/…0600_coordinator.sql).
+   Без адреса сервера в <meta> — демо-режим на тестовых данных (ничего никуда не отправляется).
+   ========================================================================================= */
+const LEAF='M11.56,95.94C11.34,95.99 11.16,96.00 10.96,96.00C10.76,96.00 10.56,95.99 10.35,95.95C10.15,95.92 9.92,95.86 9.73,95.79C9.54,95.73 9.38,95.65 9.23,95.57C9.08,95.48 8.97,95.40 8.85,95.29C8.73,95.18 8.61,95.05 8.50,94.90C8.40,94.76 8.32,94.60 8.24,94.43C8.17,94.27 8.12,94.23 8.07,93.89C8.01,93.54 7.93,93.07 7.92,92.35C7.91,91.62 7.94,90.56 8.03,89.52C8.12,88.49 8.31,87.02 8.44,86.14C8.57,85.26 8.42,85.68 8.81,84.25C9.21,82.82 10.16,79.43 10.84,77.59C11.52,75.74 12.34,74.28 12.91,73.16C13.47,72.04 13.75,71.65 14.22,70.89C14.68,70.14 15.12,69.41 15.68,68.63C16.24,67.86 16.92,67.01 17.59,66.23C18.25,65.45 18.95,64.67 19.69,63.96C20.42,63.24 21.26,62.56 21.99,61.96C22.73,61.35 23.41,60.83 24.10,60.33C24.78,59.84 25.17,59.57 26.11,58.99C27.05,58.41 28.35,57.60 29.74,56.86C31.13,56.12 31.52,55.80 34.44,54.55C37.36,53.30 44.04,50.69 47.27,49.35C50.50,48.00 51.84,47.40 53.83,46.49C55.81,45.58 57.88,44.56 59.18,43.89C60.49,43.23 60.56,43.16 61.67,42.51C62.78,41.86 64.57,40.84 65.85,39.97C67.13,39.10 68.34,38.11 69.37,37.29C70.41,36.48 71.07,36.00 72.05,35.08C73.04,34.17 74.40,32.76 75.27,31.81C76.14,30.85 76.54,30.36 77.27,29.36C78.01,28.35 78.96,26.97 79.67,25.77C80.38,24.57 81.17,22.85 81.51,22.15C81.85,21.44 81.69,21.71 81.74,21.55C81.78,21.39 81.79,21.25 81.77,21.17C81.76,21.09 81.70,21.05 81.63,21.07C81.55,21.09 81.65,20.89 81.33,21.31C81.00,21.73 80.22,22.88 79.68,23.59C79.14,24.30 78.75,24.78 78.08,25.56C77.40,26.34 76.16,27.70 75.61,28.28C75.07,28.86 75.59,28.37 74.79,29.06C73.99,29.75 72.02,31.45 70.83,32.40C69.64,33.35 68.95,33.90 67.65,34.77C66.35,35.63 64.43,36.81 63.04,37.60C61.65,38.39 60.48,38.94 59.33,39.51C58.17,40.08 57.23,40.54 56.12,41.04C55.00,41.54 54.07,41.93 52.62,42.51C51.17,43.09 49.22,43.88 47.43,44.55C45.64,45.22 44.05,45.72 41.88,46.52C39.72,47.32 36.06,48.72 34.43,49.36C32.80,49.99 33.33,49.79 32.12,50.33C30.91,50.87 28.66,51.87 27.18,52.62C25.70,53.36 24.38,54.10 23.24,54.81C22.11,55.53 21.31,56.20 20.39,56.92C19.46,57.63 18.30,58.61 17.70,59.12C17.10,59.63 17.16,59.60 16.80,59.97C16.44,60.34 16.13,60.66 15.55,61.35C14.96,62.04 14.05,63.08 13.29,64.12C12.53,65.17 11.43,67.00 10.99,67.63C10.55,68.27 10.76,67.89 10.65,67.96C10.53,68.02 10.42,68.05 10.31,68.03C10.21,68.01 10.10,67.93 10.00,67.83C9.91,67.74 9.90,67.84 9.75,67.43C9.60,67.03 9.28,66.13 9.09,65.42C8.89,64.70 8.75,64.13 8.59,63.14C8.43,62.16 8.24,60.43 8.15,59.50C8.05,58.57 8.06,58.30 8.04,57.58C8.03,56.86 7.97,56.44 8.07,55.17C8.17,53.91 8.35,51.61 8.64,49.98C8.92,48.36 9.44,46.62 9.77,45.43C10.11,44.24 10.36,43.60 10.66,42.82C10.97,42.03 11.28,41.41 11.63,40.71C11.98,40.02 12.36,39.32 12.76,38.64C13.17,37.96 13.65,37.19 14.04,36.63C14.42,36.06 14.66,35.75 15.06,35.24C15.46,34.74 16.00,34.09 16.42,33.61C16.84,33.13 16.95,32.99 17.58,32.36C18.22,31.73 19.24,30.66 20.24,29.84C21.23,29.01 22.46,28.12 23.56,27.39C24.66,26.66 25.74,26.05 26.83,25.48C27.93,24.91 28.99,24.45 30.14,23.98C31.30,23.50 32.17,23.15 33.78,22.65C35.40,22.15 37.35,21.51 39.83,20.96C42.30,20.40 45.87,19.78 48.63,19.32C51.38,18.87 53.78,18.65 56.36,18.22C58.94,17.79 62.58,17.05 64.09,16.76C65.60,16.46 64.35,16.74 65.39,16.45C66.43,16.17 68.69,15.56 70.33,15.04C71.96,14.51 73.58,13.96 75.22,13.29C76.86,12.62 78.75,11.73 80.17,11.02C81.60,10.30 82.88,9.53 83.77,8.99C84.66,8.46 84.95,8.15 85.49,7.79C86.04,7.44 86.23,7.47 87.05,6.87C87.86,6.27 89.74,4.67 90.38,4.20C91.03,3.72 90.75,4.01 90.90,4.00C91.05,3.99 91.17,4.04 91.28,4.12C91.38,4.20 91.45,4.30 91.53,4.48C91.61,4.65 91.67,4.70 91.75,5.17C91.82,5.64 91.94,5.81 92.00,7.32C92.05,8.84 92.10,12.18 92.08,14.24C92.06,16.30 92.03,17.80 91.89,19.67C91.76,21.54 91.44,23.94 91.25,25.45C91.06,26.97 91.01,27.21 90.74,28.74C90.47,30.27 90.00,32.97 89.63,34.64C89.26,36.30 88.97,37.17 88.52,38.71C88.07,40.24 87.49,42.24 86.95,43.85C86.40,45.46 85.64,47.36 85.26,48.36C84.87,49.36 85.09,48.86 84.63,49.85C84.17,50.84 83.26,52.81 82.49,54.28C81.72,55.75 80.83,57.34 80.02,58.67C79.20,59.99 78.42,61.14 77.61,62.25C76.80,63.36 75.83,64.51 75.16,65.34C74.48,66.16 74.30,66.40 73.57,67.19C72.85,67.97 71.73,69.13 70.79,70.03C69.86,70.93 68.82,71.85 67.96,72.59C67.10,73.34 66.70,73.69 65.61,74.48C64.53,75.27 62.82,76.48 61.45,77.32C60.08,78.16 58.81,78.84 57.39,79.54C55.98,80.25 53.93,81.12 52.96,81.53C51.98,81.95 52.61,81.72 51.56,82.03C50.51,82.34 47.99,83.07 46.66,83.41C45.33,83.74 44.75,83.86 43.57,84.05C42.40,84.23 41.03,84.44 39.61,84.54C38.19,84.63 36.44,84.64 35.05,84.63C33.66,84.61 32.52,84.57 31.29,84.46C30.06,84.34 28.73,84.11 27.67,83.92C26.61,83.72 26.12,83.64 24.92,83.30C23.72,82.97 21.75,82.39 20.47,81.91C19.20,81.43 17.90,80.69 17.25,80.42C16.61,80.15 16.79,80.29 16.59,80.28C16.40,80.28 16.23,80.31 16.08,80.37C15.94,80.44 15.82,80.52 15.70,80.65C15.58,80.78 15.47,80.96 15.36,81.17C15.26,81.38 15.17,81.63 15.09,81.91C15.00,82.19 14.98,82.28 14.87,82.86C14.76,83.45 14.59,84.39 14.43,85.42C14.28,86.45 14.08,87.69 13.96,89.03C13.84,90.36 13.77,92.55 13.71,93.42C13.65,94.30 13.64,94.04 13.58,94.28C13.51,94.52 13.42,94.70 13.31,94.88C13.20,95.05 13.07,95.19 12.89,95.33C12.72,95.47 12.48,95.62 12.26,95.72C12.04,95.82 11.78,95.90 11.56,95.94Z';
+const meta=n=>(document.querySelector(`meta[name="${n}"]`)||{}).content||'';
+const CFG={url:meta('tn-supabase-url').replace(/\/$/,''),key:meta('tn-supabase-anon')};
+const DEMO=!CFG.url||!CFG.key;
+const $=s=>document.querySelector(s);
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- Тексты: русский, казахский, английский ---------- */
+const D={
+ title:['Кабинет координатора','Үйлестіруші кабинеті','Coordinator dashboard'],
+ demo:['Демо-режим: тестовые данные, ничего не сохраняется на сервере. Подключение — в начале файла (meta tn-supabase-url).','Демо-режим: сынақ деректері, серверге ештеңе сақталмайды. Қосылу — файлдың басында (meta tn-supabase-url).','Demo mode: test data, nothing is saved. To connect, set meta tn-supabase-url at the top of the file.'],
+ overview:['Обзор','Шолу','Overview'],requests:['Заявки','Өтінімдер','Requests'],quests:['Квесты','Квесттер','Quests'],reports:['Отчёты смен','Ауысым есептері','Shift reports'],
+ members:['Волонтёры','Еріктілер','Volunteers'],channel:['Канал','Арна','Channel'],abuse:['Жалобы','Шағымдар','Reports'],
+ signOut:['Выйти','Шығу','Sign out'],theme:['Тема','Тақырып','Theme'],
+ loginT:['Вход для координатора','Үйлестірушінің кіруі','Coordinator sign-in'],loginB:['Введите почту, на которую зарегистрированы в Taza Niyet — пришлём код.','Taza Niyet-те тіркелген поштаңызды енгізіңіз — код жібереміз.','Enter the email you use in Taza Niyet — we’ll send a code.'],
+ email:['Почта','Пошта','Email'],getCode:['Получить код','Код алу','Get code'],codeL:['Код из письма','Хаттағы код','Code from the email'],signIn:['Войти','Кіру','Sign in'],
+ notCoord:['У этой учётной записи нет прав координатора ни в одной организации.','Бұл есептік жазбада ешбір ұйымда үйлестіруші құқығы жоқ.','This account isn’t a coordinator of any organization.'],
+ waiting:['Ждут решения','Шешімді күтуде','Needs your decision'],sPending:['заявок на вступление','кіру өтінімі','join requests'],sReports:['отчётов смен на проверке','тексерудегі ауысым есебі','shift reports to review'],
+ sAbuse:['жалоб','шағым','reports'],sWeek:['квестов на этой неделе','осы аптадағы квест','quests this week'],sMembers:['волонтёров','ерікті','volunteers'],sHours:['часов за месяц','айына сағат','hours this month'],
+ allClear:['Всё разобрано — новых решений не нужно','Бәрі қаралды — жаңа шешім қажет емес','All clear — nothing needs a decision'],
+ approve:['Одобрить','Мақұлдау','Approve'],reject:['Отклонить','Қабылдамау','Decline'],minor:['до 18','18-ге дейін','under 18'],
+ invite:['Код приглашения','Шақыру коды','Invite code'],inviteB:['Волонтёр вводит код в приложении или открывает ссылку — заявка приходит сюда.','Ерікті кодты қосымшада енгізеді немесе сілтемені ашады — өтінім осында келеді.','Volunteers enter the code in the app or open the link — the request lands here.'],
+ copy:['Скопировать ссылку','Сілтемені көшіру','Copy link'],regen:['Новый код','Жаңа код','New code'],regenQ:['Старый код перестанет работать. Продолжить?','Ескі код жұмыс істемейді. Жалғастырамыз ба?','The old code will stop working. Continue?'],
+ noRequests:['Новых заявок нет','Жаңа өтінім жоқ','No new requests'],
+ newQuest:['Новый квест','Жаңа квест','New quest'],qTitle:['Название','Атауы','Title'],qDesc:['Описание: что делать, что взять','Сипаттама: не істеу, не алу','Description: what to do, what to bring'],
+ qDate:['Дата и время начала','Басталу күні мен уақыты','Start date and time'],qDur:['Длительность, часов','Ұзақтығы, сағат','Duration, hours'],qCap:['Мест','Орын','Spots'],qDiff:['Сложность','Күрделілігі','Difficulty'],
+ qAddr:['Место сбора (адрес)','Жиналу орны (мекенжай)','Meeting point (address)'],qLat:['Широта','Ендік','Latitude'],qLng:['Долгота','Бойлық','Longitude'],qGeoHint:['Координаты места сбора нужны для геометки «Я на месте» (радиус 300 м). Скопируйте из любой карты.','«Мен осындамын» геобелгісі үшін жиналу орнының координаттары қажет (радиусы 300 м). Кез келген картадан көшіріңіз.','Coordinates of the meeting point power the “I’m here” geo check (300 m radius). Copy them from any map.'],
+ easy:['Лёгкий','Жеңіл','Easy'],medium:['Средний','Орташа','Medium'],hard:['Сложный','Күрделі','Hard'],
+ publish:['Опубликовать','Жариялау','Publish'],cancel:['Отмена','Болдырмау','Cancel'],teamsAuto:['Команды по 10 человек создадутся сами; старших назначите в списке квестов.','10 адамнан тұратын командалар өздігінен құрылады; аға еріктілерді квесттер тізімінде тағайындайсыз.','Teams of 10 are created automatically; assign leads in the quest list.'],
+ created:['Квест опубликован','Квест жарияланды','Quest published'],
+ upcoming:['Предстоящие','Алдағы','Upcoming'],past:['Прошедшие и отменённые','Өткен және болдырылмаған','Past & cancelled'],
+ spots:['мест','орын','spots'],waitlist:['в листе ожидания','күту тізімінде','on waitlist'],team:['Команда','Команда','Team'],senior:['Старший','Аға ерікті','Lead'],noSenior:['— не назначен —','— тағайындалмаған —','— not assigned —'],
+ cancelQuest:['Отменить квест','Квестті болдырмау','Cancel quest'],cancelQ:['Всем записанным придёт уведомление. Отменить квест?','Жазылғандардың бәріне хабарлама келеді. Квестті болдырмаймыз ба?','Everyone signed up will be notified. Cancel the quest?'],cancelled:['Отменён','Болдырылмады','Cancelled'],
+ noSeniorWarn:['Нет старшего — некому закрыть смену','Аға ерікті жоқ — ауысымды жабатын адам жоқ','No lead — nobody can close the shift'],
+ toReview:['На проверке','Тексеруде','To review'],approved:['Подтверждённые','Расталған','Approved'],
+ present:['на месте','орнында','present'],absent:['не пришли','келмеді','absent'],manualN:['ручных отметок','қолмен белгі','manual marks'],hoursTotal:['часов всего','барлығы сағат','hours total'],
+ open:['Открыть','Ашу','Open'],noReports:['Отчётов на проверке нет','Тексерудегі есеп жоқ','No reports to review'],
+ back:['Назад','Артқа','Back'],name:['Волонтёр','Ерікті','Volunteer'],mark:['Отметка','Белгі','Check-in'],time:['Время','Уақыт','Time'],hours:['Часы','Сағат','Hours'],
+ geo:['геометка','геобелгі','geo'],manual:['вручную старшим','аға ерікті қолмен','manual by lead'],notCame:['не пришёл','келмеді','no-show'],m:['м','м','m'],
+ manualHint:['Строки с ручной отметкой выделены: старший отметил человека без геометки. Проверьте по фото или списку, если сомневаетесь.','Қолмен белгіленген жолдар бөлектелген: аға ерікті адамды геобелгісіз белгіледі. Күмәнданың болса, фото немесе тізім бойынша тексеріңіз.','Rows marked manually are highlighted: the lead marked these people without a geo check. Verify with photos or a list if unsure.'],
+ confirm:['Подтвердить часы','Сағаттарды растау','Confirm hours'],confirmB:['Волонтёры получат часы и баллы Tz (1 ч = 5 Tz), старший — +10 Tz за учёт.','Еріктілер сағат пен Tz ұпайын алады (1 сағ = 5 Tz), аға ерікті — есеп үшін +10 Tz.','Volunteers get hours and Tz (1 h = 5 Tz); the lead gets +10 Tz for record-keeping.'],
+ returnR:['Вернуть старшему','Аға еріктіге қайтару','Return to lead'],note:['Комментарий','Пікір','Comment'],penalty:['Штраф старшему','Аға еріктіге айыппұл','Penalty for lead'],penaltyB:['За ошибки в учёте: часы волонтёров не меняются, у старшего списываются баллы Tz.','Есептегі қателер үшін: еріктілердің сағаттары өзгермейді, аға еріктіден Tz ұпайы алынады.','For record-keeping mistakes: volunteers’ hours stay; the lead loses Tz points.'],
+ amount:['Сколько Tz списать','Қанша Tz алу','Tz to deduct'],apply:['Применить','Қолдану','Apply'],done:['Готово','Дайын','Done'],
+ hoursDone:['Часы подтверждены — волонтёрам пришли уведомления','Сағаттар расталды — еріктілерге хабарлама келді','Hours confirmed — volunteers notified'],returned:['Отчёт возвращён старшему','Есеп аға еріктіге қайтарылды','Report returned to the lead'],penalized:['Штраф начислен','Айыппұл есептелді','Penalty applied'],
+ role:['Роль','Рөлі','Role'],volunteer:['Волонтёр','Ерікті','Volunteer'],seniorR:['Старший','Аға ерікті','Lead'],coordinator:['Координатор','Үйлестіруші','Coordinator'],
+ monthH:['За месяц','Айына','This month'],totalH:['Всего','Барлығы','Total'],shifts:['Смен','Ауысым','Shifts'],remove:['Исключить','Шығару','Remove'],removeQ:['Исключить из организации? Записи на будущие квесты отменятся. Подтверждённые часы останутся.','Ұйымнан шығару керек пе? Болашақ квесттерге жазылулар болдырылмайды. Расталған сағаттар қалады.','Remove from the organization? Future sign-ups are cancelled. Confirmed hours stay.'],
+ search:['Поиск по имени','Аты бойынша іздеу','Search by name'],
+ post:['Сообщение в канал','Арнаға хабарлама','Post to the channel'],postB:['Его увидят все волонтёры организации; придёт уведомление.','Оны ұйымның барлық еріктілері көреді; хабарлама келеді.','All volunteers of the organization will see it and get a notification.'],send:['Отправить','Жіберу','Send'],sent:['Отправлено','Жіберілді','Sent'],
+ noAbuse:['Жалоб нет','Шағым жоқ','No reports'],from:['Пожаловался','Шағымданған','Reported by'],on:['На кого','Кімге','About'],hideMsg:['Удалить сообщение','Хабарламаны жою','Delete message'],removeUser:['Исключить из организации','Ұйымнан шығару','Remove from org'],dismiss:['Жалоба необоснованна','Шағым негізсіз','Dismiss'],resolved:['Жалоба закрыта','Шағым жабылды','Report closed'],
+ r_spam:['Спам или реклама','Спам немесе жарнама','Spam or ads'],r_insult:['Оскорбления или травля','Қорлау немесе қудалау','Insults or bullying'],r_inappropriate:['Неприемлемый контент','Орынсыз мазмұн','Inappropriate content'],r_danger:['Угроза или опасность','Қауіп немесе қатер','Threat or danger'],r_other:['Другое','Басқа','Other'],
+ err:['Не получилось. Проверьте сеть и попробуйте ещё раз','Болмады. Желіні тексеріп, қайталап көріңіз','That didn’t work. Check your connection and try again'],
+ loading:['Загрузка…','Жүктелуде…','Loading…'],
+};
+let L=+(localStorage.getItem('tnc_lang')??(navigator.language.startsWith('kk')?1:navigator.language.startsWith('en')?2:0));
+const t=(k,...a)=>{let v=(D[k]||[k])[L]||(D[k]||[k])[0];return a.length?v.replace(/\{\w+\}/g,()=>a.shift()):v};
+const LOC=['ru-RU','kk-KZ','en-GB'];
+// Даты без Intl: не во всех браузерах есть казахская локаль.
+const MO=[['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'],['қаң','ақп','нау','сәу','мам','мау','шіл','там','қыр','қаз','қар','жел'],['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']];
+const hm=d=>String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+const fdt=s=>{const d=new Date(s);return `${d.getDate()} ${MO[L][d.getMonth()]}, ${hm(d)}`};
+const fh=h=>(+h%1?(+h).toFixed(1):String(+h)).replace('.',L===2?'.':',');
+
+const ICON={home:'M3 11l9-8 9 8v10h-6v-6H9v6H3z',user:'M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0',map:'M9 4l-6 2v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14',check:'M9 11l3 3 8-8M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h9',grp:'M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM2 20a7 7 0 0114 0M16 4.5a3.5 3.5 0 010 6.5M18 13.5a7 7 0 014 6.5',mega:'M3 10v4h3l6 4V6L6 10H3zM16 8a5 5 0 010 8',flag:'M5 21V4h12l-2 4 2 4H5',out:'M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3',moon:'M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z',back:'M15 5l-7 7 7 7',pin:'M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z',hand:'M8 13V5.5a1.5 1.5 0 013 0V12M11 11V4.5a1.5 1.5 0 013 0V12M14 11.5V6a1.5 1.5 0 013 0v7.5c0 4-2.5 7.5-6.5 7.5-3 0-4.5-1.5-6-4l-2-3.5a1.5 1.5 0 012.5-1.6L8 15',plus:'M12 5v14M5 12h14',ok:'M20 6L9 17l-5-5'};
+const ic=n=>`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICON[n]}"/></svg>`;
+const leaf=`<svg viewBox="4 4 92 92" aria-hidden="true"><path fill="currentColor" d="${LEAF}"/></svg>`;
+function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('show');clearTimeout(toast.i);toast.i=setTimeout(()=>el.classList.remove('show'),2600)}
+
+/* ---------- Сервер (REST Supabase) ---------- */
+const S={page:'overview',org:null,orgs:[],data:{},token:null,refresh:null,dark:localStorage.getItem('tnc_dark')==='1',report:null,rtab:'sent',q:''};
+try{const s=JSON.parse(sessionStorage.getItem('tnc_session')||'null');if(s){S.token=s.access_token;S.refresh=s.refresh_token;S.exp=s.exp}}catch(e){}
+async function http(path,opt={},retry=true){
+ if(S.token&&S.exp&&Date.now()>S.exp-60e3)await refreshToken();
+ const r=await fetch(CFG.url+path,{...opt,headers:{apikey:CFG.key,Authorization:'Bearer '+(S.token||CFG.key),'Content-Type':'application/json',...(opt.headers||{})}});
+ if(r.status===401&&retry&&S.refresh){await refreshToken();return http(path,opt,false)}
+ const body=r.status===204?null:await r.json().catch(()=>null);
+ if(!r.ok)throw new Error((body&&(body.message||body.msg||body.error_description))||r.statusText);
+ return body}
+function saveSession(j){S.token=j.access_token;S.refresh=j.refresh_token;S.exp=Date.now()+j.expires_in*1e3;sessionStorage.setItem('tnc_session',JSON.stringify({access_token:S.token,refresh_token:S.refresh,exp:S.exp}))}
+async function refreshToken(){try{const j=await http('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:JSON.stringify({refresh_token:S.refresh})},false);saveSession(j)}catch(e){signOut()}}
+const rpc=(fn,params)=>DEMO?Demo.rpc(fn,params||{}):http('/rest/v1/rpc/'+fn,{method:'POST',body:JSON.stringify(params||{})});
+const insertQuest=row=>DEMO?Demo.insertQuest(row):http('/rest/v1/quests',{method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify(row)});
+const me=()=>{try{return JSON.parse(atob(S.token.split('.')[1])).sub}catch(e){return 'demo'}};
+function signOut(){S.token=null;S.refresh=null;sessionStorage.removeItem('tnc_session');S.org=null;render()}
+
+/* ---------- Демо-данные ---------- */
+const Demo=(()=>{const now=Date.now(),H=36e5,org='tq';
+ const people={c1:'Айжан Б.',a1:'Арман Т.',a2:'Данияр С.',b1:'Айгерим Н.',b2:'Аружан М.',b3:'Тимур К.',b4:'Дана С.',b5:'Ержан А.',b6:'Камила Р.',b7:'Нурсултан Ж.',p1:'Мадина К.',p2:'Алихан О.'};
+ const minor=new Set(['b2','p2']);
+ const mem=[['c1','active','coordinator',120,44,12],['a1','active','senior',88,16,25],['a2','active','senior',71,15,22],['b1','active','volunteer',31,12,9],['b2','active','volunteer',18,6,5],['b3','active','volunteer',42,14,11],['b4','active','volunteer',27.5,9,8],['b5','active','volunteer',12,4,4],['b6','active','volunteer',55,18,20],['b7','active','volunteer',8,3,3],['p1','pending','volunteer',0,0,0],['p2','pending','volunteer',0,0,0]];
+ const M=mem.map(x=>({user_id:x[0],name:people[x[0]],minor:minor.has(x[0]),status:x[1],role:x[2],joined_at:new Date(now-(x[0][0]==='p'?2:90)*864e5).toISOString(),total_hours:x[3],month_hours:x[4],shifts:x[5]}));
+ let code='TAZA2026';
+ const team=(qid,n,cap,sid,j)=>({id:qid+'-t'+n,number:n,capacity:cap,senior_id:sid,senior_name:sid?people[sid]:null,joined:j});
+ const Q=[
+  {id:'q1',title:'Уборка набережной Ишима',starts_at:new Date(now+2*864e5).toISOString(),duration_min:180,capacity:20,joined:12,waitlist:0,status:'published',difficulty:'easy',address:'Набережная, у моста',teams:[team('q1',1,10,'a1',10),team('q1',2,10,null,2)]},
+  {id:'q2',title:'Субботник в центральном парке',starts_at:new Date(now+5*864e5).toISOString(),duration_min:120,capacity:25,joined:9,waitlist:0,status:'published',difficulty:'easy',address:'Центральный парк, главный вход',teams:[team('q2',1,9,'a2',9),team('q2',2,8,null,0),team('q2',3,8,null,0)]},
+  {id:'q3',title:'Сбор пластика у озера',starts_at:new Date(now+3*H).toISOString(),duration_min:120,capacity:15,joined:15,waitlist:3,status:'published',difficulty:'medium',address:'Озеро, северный берег',teams:[team('q3',1,8,'a1',8),team('q3',2,7,'a2',7)]},
+  {id:'q4',title:'Посадка деревьев',starts_at:new Date(now-26*H).toISOString(),duration_min:360,capacity:10,joined:6,waitlist:0,status:'published',difficulty:'hard',address:'Парк Жастар',teams:[team('q4',1,10,'a2',6)]},
+  {id:'q5',title:'Экоурок в школе №12',starts_at:new Date(now-50*H).toISOString(),duration_min:120,capacity:6,joined:4,waitlist:0,status:'published',difficulty:'easy',address:'Школа №12',teams:[team('q5',1,6,'a1',4)]},
+ ];
+ const R=[
+  {id:'r1',quest_id:'q4',quest_title:'Посадка деревьев',starts_at:Q[3].starts_at,team_number:1,senior_name:people.a2,submitted_at:new Date(now-20*H).toISOString(),status:'sent',items:[
+   {user_id:'b1',name:people.b1,minor:false,present:true,hours:6,manual:false,checked_in_at:new Date(now-26*H+3e5).toISOString(),distance_m:42,geo_verified:true},
+   {user_id:'b3',name:people.b3,minor:false,present:true,hours:6,manual:false,checked_in_at:new Date(now-26*H-6e5).toISOString(),distance_m:120,geo_verified:true},
+   {user_id:'b2',name:people.b2,minor:true,present:true,hours:6,manual:true,checked_in_at:new Date(now-24*H).toISOString(),distance_m:null,geo_verified:false},
+   {user_id:'b6',name:people.b6,minor:false,present:true,hours:4.5,manual:false,checked_in_at:new Date(now-25*H).toISOString(),distance_m:1800,geo_verified:false},
+   {user_id:'b5',name:people.b5,minor:false,present:true,hours:6,manual:true,checked_in_at:new Date(now-24*H).toISOString(),distance_m:null,geo_verified:false},
+   {user_id:'b7',name:people.b7,minor:false,present:false,hours:0,manual:false,checked_in_at:null,distance_m:null,geo_verified:false}]},
+  {id:'r2',quest_id:'q5',quest_title:'Экоурок в школе №12',starts_at:Q[4].starts_at,team_number:1,senior_name:people.a1,submitted_at:new Date(now-46*H).toISOString(),status:'sent',items:[
+   {user_id:'b4',name:people.b4,minor:false,present:true,hours:2,manual:false,checked_in_at:new Date(now-50*H).toISOString(),distance_m:30,geo_verified:true},
+   {user_id:'b1',name:people.b1,minor:false,present:true,hours:2,manual:false,checked_in_at:new Date(now-50*H+12e4).toISOString(),distance_m:55,geo_verified:true},
+   {user_id:'b3',name:people.b3,minor:false,present:true,hours:2,manual:false,checked_in_at:new Date(now-50*H-6e4).toISOString(),distance_m:12,geo_verified:true}]},
+ ];
+ const A=[{id:1,reason:'insult',created_at:new Date(now-5*H).toISOString(),reporter_name:people.b4,target_id:'b7',target_name:people.b7,message:'Сами копайте, я только за баллами пришёл 😂 кто не согласен — сами дураки',chat_kind:'team'}];
+ const posts=[{body:'Спасибо всем, кто вышел на уборку набережной: 46 мешков мусора!',at:new Date(now-5*H).toISOString()}];
+ const sum=r=>({present:r.items.filter(i=>i.present).length,absent:r.items.filter(i=>!i.present).length,manual:r.items.filter(i=>i.manual).length,total_hours:r.items.filter(i=>i.present).reduce((a,i)=>a+i.hours,0)});
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
+ const fn={
+  coord_orgs:()=>[{id:org,name:'TazaQala'}],
+  coord_overview:()=>[{pending_members:M.filter(m=>m.status==='pending').length,pending_reports:R.filter(r=>r.status==='sent').length,open_abuse:A.length,quests_week:Q.filter(q=>q.status==='published'&&new Date(q.starts_at)>now&&new Date(q.starts_at)<now+7*864e5).length,members:M.filter(m=>m.status==='active').length,month_hours:M.reduce((a,m)=>a+m.month_hours,0)}],
+  coord_members:()=>M.filter(m=>m.status!=='left').map(m=>({...m})),
+  decide_membership:({p_user,p_approve})=>{const m=M.find(x=>x.user_id===p_user);m.status=p_approve?'active':'left'},
+  coord_set_role:({p_user,p_role})=>{M.find(x=>x.user_id===p_user).role=p_role},
+  coord_remove_member:({p_user})=>{M.find(x=>x.user_id===p_user).status='left'},
+  coord_invite_code:({p_regenerate})=>{if(p_regenerate){const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';code=Array.from({length:8},()=>a[Math.random()*32|0]).join('')}return code},
+  coord_quests:()=>Q.map(q=>({...q,teams:q.teams.map(x=>({...x}))})),
+  coord_assign_senior:({p_team,p_user})=>{for(const q of Q)for(const x of q.teams)if(x.id===p_team){x.senior_id=p_user;x.senior_name=p_user?people[p_user]:null}},
+  coord_cancel_quest:({p_quest})=>{Q.find(q=>q.id===p_quest).status='cancelled'},
+  coord_reports:({p_status})=>R.filter(r=>r.status===p_status).map(r=>({...r,...sum(r)})),
+  coord_report_items:({p_report})=>R.find(r=>r.id===p_report).items,
+  approve_shift:({p_report,p_approve})=>{R.find(r=>r.id===p_report).status=p_approve?'approved':'rejected'},
+  penalize:()=>null,
+  coord_post:({p_body})=>{posts.unshift({body:p_body,at:new Date().toISOString()})},
+  coord_abuse:()=>A.map(a=>({...a})),
+  coord_resolve_abuse:({p_id,p_remove_user})=>{const i=A.findIndex(a=>a.id===p_id);if(p_remove_user)fn.coord_remove_member({p_user:A[i].target_id});A.splice(i,1)},
+ };
+ return{posts,async rpc(name,p){await wait(250);if(!fn[name])throw new Error('demo: '+name);return fn[name](p)},
+  async insertQuest(row){await wait(300);const n=Math.max(1,Math.min(5,Math.ceil(row.capacity/10)));const id='q'+(Q.length+1);
+   Q.unshift({id,title:row.title,starts_at:row.starts_at,duration_min:row.duration_min,capacity:row.capacity,joined:0,waitlist:0,status:'published',difficulty:row.difficulty,address:row.address,
+    teams:Array.from({length:n},(_,i)=>team(id,i+1,Math.floor(row.capacity/n)+(i<row.capacity%n?1:0),null,0))});return[{id}]}}})();
+
+/* ---------- Загрузка ---------- */
+async function load(page=S.page){
+ const o=S.org;S.loading=true;render();
+ try{
+  S.data.ov=(await rpc('coord_overview',{p_org:o}))[0]; // счётчики в меню — всегда свежие
+  if(page==='overview'||page==='requests'||page==='members'||page==='quests')S.data.members=await rpc('coord_members',{p_org:o});
+  if(page==='requests')S.data.code=await rpc('coord_invite_code',{p_org:o});
+  if(page==='quests')S.data.quests=await rpc('coord_quests',{p_org:o});
+  if(page==='reports'){S.data.reports=await rpc('coord_reports',{p_org:o,p_status:S.rtab==='sent'?'sent':'approved'});if(S.report)S.data.items=await rpc('coord_report_items',{p_report:S.report})}
+  if(page==='abuse'||page==='overview')S.data.abuse=await rpc('coord_abuse',{p_org:o});
+ }catch(e){toast(t('err'))}
+ S.loading=false;render()}
+async function act(fn,params,ok){try{await rpc(fn,params);if(ok)toast(ok);await load()}catch(e){toast(t('err')+(e.message?' · '+e.message:''))}}
+
+/* ---------- Экраны ---------- */
+const pages=[['overview','home'],['requests','user'],['quests','map'],['reports','check'],['members','grp'],['channel','mega'],['abuse','flag']];
+const badge=p=>{const ov=S.data.ov||{};const n=p==='requests'?ov.pending_members:p==='reports'?ov.pending_reports:p==='abuse'?ov.open_abuse:0;return n?`<span class="cnt" aria-label="${n}">${n}</span>`:''};
+const av=n=>`<span class="av" aria-hidden="true">${esc((n||'?')[0])}</span>`;
+const empty=(m)=>`<div class="card empty">${leaf}<div>${m}</div></div>`;
+
+function viewLogin(){return `<div class="login"><div class="row" style="gap:12px;margin-bottom:24px"><span style="width:44px;height:44px;color:var(--pr);display:block">${leaf}</span><div><b style="font-size:22px">Taza Niyet</b><div class="t2 sm">${t('title')}</div></div></div>
+ <div class="card"><h1 style="font-size:22px">${t('loginT')}</h1><p class="lead">${t('loginB')}</p>
+ ${!S.otpSent?`<form id="f-otp" class="list"><label class="fld">${t('email')}<input type="email" id="em" required autocomplete="email" value="${esc(S.email||'')}"></label><button class="btn p">${t('getCode')}</button></form>`
+ :`<form id="f-verify" class="list"><label class="fld">${t('codeL')}<input id="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required></label><button class="btn p">${t('signIn')}</button><button type="button" class="btn g" data-act="otp-back">${t('back')}</button></form>`}
+ ${S.notCoord?`<p style="color:var(--danger)">${t('notCoord')}</p>`:''}</div></div>`}
+
+function viewOverview(){const ov=S.data.ov;if(!ov)return '';
+ const stat=(n,label,page,alert)=>`<button class="card stat ${alert&&n?'alert':''}" data-page="${page}"><b>${typeof n==='number'?n:fh(n)}</b><span>${label}</span></button>`;
+ const pend=(S.data.members||[]).filter(m=>m.status==='pending');
+ const abuse=S.data.abuse||[];
+ return `<h1>${t('overview')}</h1><p class="lead">${esc(S.orgName)}</p>
+ <div class="grid">${stat(ov.pending_members,t('sPending'),'requests',1)}${stat(ov.pending_reports,t('sReports'),'reports',1)}${stat(ov.open_abuse,t('sAbuse'),'abuse',1)}${stat(ov.quests_week,t('sWeek'),'quests')}${stat(ov.members,t('sMembers'),'members')}${stat(+ov.month_hours,t('sHours'),'members')}</div>
+ <h2>${t('waiting')}</h2>
+ ${!pend.length&&!ov.pending_reports&&!abuse.length?empty(t('allClear')):`<div class="list">
+  ${pend.map(reqRow).join('')}
+  ${ov.pending_reports?`<div class="card item">${ic('check')}<div class="grow"><b>${ov.pending_reports} ${t('sReports')}</b></div><button class="btn s" data-page="reports">${t('open')}</button></div>`:''}
+  ${abuse.length?`<div class="card item">${ic('flag')}<div class="grow"><b>${abuse.length} ${t('sAbuse')}</b></div><button class="btn s" data-page="abuse">${t('open')}</button></div>`:''}</div>`}`}
+
+const reqRow=m=>`<div class="card item">${av(m.name)}<div class="grow"><b>${esc(m.name)}</b> ${m.minor?`<span class="badge minor">${t('minor')}</span>`:''}<div class="t2 sm">${fdt(m.joined_at)}</div></div>
+ <button class="btn p" data-act="approve" data-id="${m.user_id}">${t('approve')}</button><button class="btn g" data-act="reject" data-id="${m.user_id}">${t('reject')}</button></div>`;
+
+function viewRequests(){const pend=(S.data.members||[]).filter(m=>m.status==='pending');const link='https://tazaniyet.kz/join/'+(S.data.code||'');
+ return `<h1>${t('requests')}</h1><p class="lead">${esc(S.orgName)}</p>
+ <div class="list">${pend.length?pend.map(reqRow).join(''):empty(t('noRequests'))}</div>
+ <h2>${t('invite')}</h2><div class="card"><div class="row wrap"><span class="code" aria-label="${t('invite')}">${esc(S.data.code||'—')}</span><span class="grow"></span><button class="btn s" data-act="copy-link" data-v="${esc(link)}">${t('copy')}</button><button class="btn g" data-act="regen">${t('regen')}</button></div><p class="t2 sm" style="margin:10px 0 0">${t('inviteB')} ${esc(link)}</p></div>`}
+
+function viewQuests(){const qs=S.data.quests||[];const now=Date.now();
+ const seniors=(S.data.members||[]).filter(m=>m.status==='active'&&(m.role==='senior'||m.role==='coordinator'));
+ const up=qs.filter(q=>q.status==='published'&&new Date(q.starts_at).getTime()+q.duration_min*6e4>now).sort((a,b)=>new Date(a.starts_at)-new Date(b.starts_at));
+ const past=qs.filter(q=>!up.includes(q));
+ const card=q=>{const live=up.includes(q);return `<div class="card"><div class="row wrap"><div class="grow"><h3>${esc(q.title)}</h3><div class="t2 sm">${fdt(q.starts_at)} · ${fh(q.duration_min/60)} ч · ${esc(q.address||'')}</div></div>
+  <span class="badge ${q.joined>=q.capacity?'warn':'ok'}">${q.joined}/${q.capacity} ${t('spots')}</span>${q.waitlist?`<span class="badge">${q.waitlist} ${t('waitlist')}</span>`:''}${q.status==='cancelled'?`<span class="badge bad">${t('cancelled')}</span>`:''}</div>
+  ${live?`<table style="margin-top:12px"><thead><tr><th>${t('team')}</th><th>${t('spots')}</th><th>${t('senior')}</th></tr></thead><tbody>${(q.teams||[]).map(tm=>`<tr><td>${tm.number}</td><td>${tm.joined}/${tm.capacity}</td><td><select class="sel" data-act="senior" data-team="${tm.id}" aria-label="${t('senior')} · ${t('team')} ${tm.number}"><option value="">${t('noSenior')}</option>${seniors.map(s=>`<option value="${s.user_id}" ${s.user_id===tm.senior_id?'selected':''}>${esc(s.name)}</option>`).join('')}</select>${!tm.senior_id&&tm.joined?` <span class="badge warn">${t('noSeniorWarn')}</span>`:''}</td></tr>`).join('')}</tbody></table>
+  <div class="row" style="margin-top:12px;justify-content:flex-end"><button class="btn d" data-act="cancel-quest" data-id="${q.id}">${t('cancelQuest')}</button></div>`:''}</div>`};
+ return `<div class="row wrap"><div class="grow"><h1>${t('quests')}</h1><p class="lead">${esc(S.orgName)}</p></div><button class="btn p" data-act="new-quest">${ic('plus')}${t('newQuest')}</button></div>
+ <h2>${t('upcoming')}</h2><div class="list">${up.length?up.map(card).join(''):empty('—')}</div>
+ ${past.length?`<h2>${t('past')}</h2><div class="list">${past.map(card).join('')}</div>`:''}
+ <dialog id="dlg-quest" aria-labelledby="dq-t"><form id="f-quest" method="dialog"><h2 id="dq-t" style="margin-top:0">${t('newQuest')}</h2><div class="form">
+  <label class="fld full">${t('qTitle')}<input name="title" required minlength="3" maxlength="80"></label>
+  <label class="fld full">${t('qDesc')}<textarea name="description" maxlength="2000"></textarea></label>
+  <label class="fld">${t('qDate')}<input name="starts_at" type="datetime-local" required></label>
+  <label class="fld">${t('qDur')}<input name="hours" type="number" min="0.5" max="12" step="0.5" value="2" required></label>
+  <label class="fld">${t('qCap')}<input name="capacity" type="number" min="1" max="500" value="10" required></label>
+  <label class="fld">${t('qDiff')}<select name="difficulty"><option value="easy">${t('easy')}</option><option value="medium">${t('medium')}</option><option value="hard">${t('hard')}</option></select></label>
+  <label class="fld full">${t('qAddr')}<input name="address" required maxlength="120"></label>
+  <label class="fld">${t('qLat')}<input name="lat" type="number" step="any" min="40" max="56" value="51.1282" required></label>
+  <label class="fld">${t('qLng')}<input name="lng" type="number" step="any" min="46" max="88" value="71.4306" required></label>
+  <p class="t2 sm full" style="margin:0">${t('qGeoHint')} ${t('teamsAuto')}</p></div>
+  <div class="row" style="justify-content:flex-end;margin-top:20px"><button type="button" class="btn g" data-act="close-dlg">${t('cancel')}</button><button class="btn p" value="ok">${t('publish')}</button></div></form></dialog>`}
+
+function viewReports(){
+ if(S.report){const r=(S.data.reports||[]).find(x=>x.id===S.report);const items=S.data.items||[];if(!r)return '';
+  const mark=i=>!i.present?`<span class="badge">${t('notCame')}</span>`:i.manual?`<span class="badge warn">${ic('hand')} ${t('manual')}</span>`:i.geo_verified?`<span class="badge ok">${ic('pin')} ${t('geo')}${i.distance_m!=null?' · '+i.distance_m+' '+t('m'):''}</span>`:`<span class="badge warn">${ic('pin')} ${i.distance_m!=null?(i.distance_m/1000).toFixed(1).replace('.',L===2?'.':',')+' км':'—'}</span>`;
+  return `<button class="back" data-act="report-back">${ic('back')}${t('back')}</button><h1>${esc(r.quest_title)}</h1><p class="lead">${fdt(r.starts_at)} · ${t('team')} ${r.team_number} · ${t('senior')}: ${esc(r.senior_name||'—')}</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))"><div class="card stat"><b>${r.present}</b><span>${t('present')}</span></div><div class="card stat"><b>${r.absent}</b><span>${t('absent')}</span></div><div class="card stat ${r.manual?'alert':''}"><b>${r.manual}</b><span>${t('manualN')}</span></div><div class="card stat"><b>${fh(r.total_hours)}</b><span>${t('hoursTotal')}</span></div></div>
+  ${r.manual?`<p class="demo" style="margin-top:16px">${t('manualHint')}</p>`:''}
+  <div class="card" style="margin-top:12px;overflow-x:auto"><table><thead><tr><th>${t('name')}</th><th>${t('mark')}</th><th>${t('time')}</th><th style="text-align:right">${t('hours')}</th></tr></thead><tbody>
+  ${items.map(i=>`<tr class="${i.manual?'manual':''} ${i.present?'':'absent'}"><td><div class="row">${av(i.name)}<span>${esc(i.name)} ${i.minor?`<span class="badge minor">${t('minor')}</span>`:''}</span></div></td><td>${mark(i)}</td><td>${i.checked_in_at?hm(new Date(i.checked_in_at)):'—'}</td><td style="text-align:right;font-weight:700">${fh(i.hours)}</td></tr>`).join('')}</tbody></table></div>
+  ${r.status==='sent'?`<div class="card" style="margin-top:16px"><p style="margin:0 0 12px">${t('confirmB')}</p><div class="row wrap"><button class="btn p" data-act="approve-report">${ic('ok')}${t('confirm')}</button><button class="btn s" data-act="return-report">${t('returnR')}</button><span class="grow"></span><button class="btn d" data-act="penalty">${t('penalty')}</button></div></div>`
+  :`<div class="row wrap" style="margin-top:16px"><span class="badge ok">${ic('ok')} ${t('approved')}</span><span class="grow"></span><button class="btn d" data-act="penalty">${t('penalty')}</button></div>`}
+  <dialog id="dlg-note"><form method="dialog" id="f-note"><h2 style="margin-top:0" id="dn-t"></h2><p class="t2" id="dn-b"></p>
+   <label class="fld" id="dn-amt-l">${t('amount')}<select id="dn-amt"><option>5</option><option selected>10</option><option>20</option><option>50</option></select></label>
+   <label class="fld" style="margin-top:12px">${t('note')}<textarea id="dn-note" maxlength="300" required></textarea></label>
+   <div class="row" style="justify-content:flex-end;margin-top:16px"><button type="button" class="btn g" data-act="close-dlg">${t('cancel')}</button><button class="btn p" value="ok">${t('apply')}</button></div></form></dialog>`}
+ const rs=S.data.reports||[];
+ return `<h1>${t('reports')}</h1><p class="lead">${esc(S.orgName)}</p><div class="seg" role="group"><button aria-pressed="${S.rtab==='sent'}" data-act="rtab" data-v="sent">${t('toReview')}</button><button aria-pressed="${S.rtab==='approved'}" data-act="rtab" data-v="approved">${t('approved')}</button></div>
+ <div class="list" style="margin-top:16px">${rs.length?rs.map(r=>`<div class="card item"><div class="grow"><b>${esc(r.quest_title)}</b> · ${t('team')} ${r.team_number}<div class="t2 sm">${fdt(r.starts_at)} · ${t('senior')}: ${esc(r.senior_name||'—')}</div></div>
+  <span class="badge ok">${r.present} ${t('present')}</span>${r.absent?`<span class="badge">${r.absent} ${t('absent')}</span>`:''}${r.manual?`<span class="badge warn">${ic('hand')} ${r.manual} ${t('manualN')}</span>`:''}<b>${fh(r.total_hours)} ч</b><button class="btn s" data-act="open-report" data-id="${r.id}">${t('open')}</button></div>`).join(''):empty(t('noReports'))}</div>`}
+
+function viewMembers(){const q=S.q.trim().toLowerCase();const ms=(S.data.members||[]).filter(m=>m.status==='active'&&(!q||m.name.toLowerCase().includes(q))).sort((a,b)=>b.month_hours-a.month_hours);
+ return `<h1>${t('members')}</h1><p class="lead">${esc(S.orgName)}</p><label class="fld" style="max-width:360px;margin-bottom:16px"><span class="sr-only" style="position:absolute;left:-9999px">${t('search')}</span><input id="msearch" placeholder="${t('search')}" value="${esc(S.q)}"></label>
+ <div class="card" style="overflow-x:auto"><table><thead><tr><th>${t('name')}</th><th>${t('role')}</th><th style="text-align:right">${t('monthH')}</th><th style="text-align:right">${t('totalH')}</th><th style="text-align:right">${t('shifts')}</th><th></th></tr></thead><tbody>
+ ${ms.map(m=>`<tr><td><div class="row">${av(m.name)}<span>${esc(m.name)} ${m.minor?`<span class="badge minor">${t('minor')}</span>`:''}</span></div></td>
+  <td>${m.role==='coordinator'?`<span class="badge ok">${t('coordinator')}</span>`:`<select class="sel" data-act="role" data-id="${m.user_id}" aria-label="${t('role')}: ${esc(m.name)}"><option value="volunteer" ${m.role==='volunteer'?'selected':''}>${t('volunteer')}</option><option value="senior" ${m.role==='senior'?'selected':''} ${m.minor?'disabled':''}>${t('seniorR')}</option></select>`}</td>
+  <td style="text-align:right;font-weight:700">${fh(m.month_hours)}</td><td style="text-align:right">${fh(m.total_hours)}</td><td style="text-align:right">${m.shifts}</td>
+  <td style="text-align:right">${m.role==='coordinator'?'':`<button class="btn g" data-act="remove" data-id="${m.user_id}">${t('remove')}</button>`}</td></tr>`).join('')}</tbody></table></div>`}
+
+function viewChannel(){return `<h1>${t('channel')}</h1><p class="lead">${esc(S.orgName)}</p><form id="f-post" class="card"><label class="fld">${t('post')}<textarea id="post" maxlength="2000" required></textarea></label><p class="t2 sm">${t('postB')}</p><div class="row" style="justify-content:flex-end"><button class="btn p">${ic('mega')}${t('send')}</button></div></form>
+ ${DEMO?`<div class="list" style="margin-top:16px">${Demo.posts.map(p=>`<div class="card"><div class="t2 sm">${fdt(p.at)}</div><div style="white-space:pre-wrap">${esc(p.body)}</div></div>`).join('')}</div>`:''}`}
+
+function viewAbuse(){const as=S.data.abuse||[];
+ return `<h1>${t('abuse')}</h1><p class="lead">${esc(S.orgName)}</p><div class="list">${as.length?as.map(a=>`<div class="card"><div class="row wrap"><span class="badge bad">${ic('flag')} ${t('r_'+a.reason)}</span><span class="t2 sm">${fdt(a.created_at)}</span></div>
+  <p style="margin:10px 0 0">${t('on')}: <b>${esc(a.target_name||'—')}</b> · ${t('from')}: ${esc(a.reporter_name||'—')}</p>${a.message?`<div class="msg">${esc(a.message)}</div>`:''}
+  <div class="row wrap" style="margin-top:12px">${a.message?`<button class="btn s" data-act="abuse" data-id="${a.id}" data-del="1">${t('hideMsg')}</button>`:''}<button class="btn d" data-act="abuse" data-id="${a.id}" data-rm="1">${t('removeUser')}</button><span class="grow"></span><button class="btn g" data-act="abuse" data-id="${a.id}">${t('dismiss')}</button></div></div>`).join(''):empty(t('noAbuse'))}</div>`}
+
+const VIEWS={overview:viewOverview,requests:viewRequests,quests:viewQuests,reports:viewReports,members:viewMembers,channel:viewChannel,abuse:viewAbuse};
+
+function render(){
+ // Пока открыто окно (новый квест, комментарий) — не перерисовываем, чтобы не потерять ввод.
+ if(document.querySelector('dialog[open]')){S.deferred=true;return}
+ document.documentElement.lang=['ru','kk','en'][L];document.body.classList.toggle('dark',S.dark);document.title='Taza Niyet — '+t('title');
+ const root=$('#root');
+ if(!DEMO&&!S.token){root.innerHTML=viewLogin();return}
+ if(!S.org){root.innerHTML=`<div class="login"><p>${t('loading')}</p></div>`;return}
+ const focus=document.activeElement&&document.activeElement.id;
+ root.innerHTML=`<div class="app"><aside aria-label="${t('title')}"><div class="brand">${leaf}<div><b>Taza Niyet</b><small>${t('title')}</small></div></div>
+  ${pages.map(p=>`<button class="nav" data-page="${p[0]}" ${S.page===p[0]?'aria-current="page"':''}>${ic(p[1])}<span>${t(p[0])}</span>${badge(p[0])}</button>`).join('')}
+  <div class="side-foot">${S.orgs.length>1?`<select class="sel" id="orgsel" aria-label="org">${S.orgs.map(o=>`<option value="${o.id}" ${o.id===S.org?'selected':''}>${esc(o.name)}</option>`).join('')}</select>`:''}
+   <div class="seg" role="group" aria-label="Language">${['RU','KZ','EN'].map((x,i)=>`<button aria-pressed="${L===i}" data-lang="${i}">${x}</button>`).join('')}</div>
+   <div class="row"><button class="btn g" data-act="theme" aria-label="${t('theme')}">${ic('moon')}</button>${DEMO?'':`<button class="btn g" data-act="signout">${ic('out')}${t('signOut')}</button>`}</div></div></aside>
+  <main id="main" ${S.loading?'aria-busy="true"':''}>${DEMO?`<div class="demo" role="note">${t('demo')}</div>`:''}${VIEWS[S.page]()}</main></div>`;
+ if(focus){const el=document.getElementById(focus);if(el){el.focus();if(el.setSelectionRange&&el.value)el.setSelectionRange(el.value.length,el.value.length)}}}
+
+/* ---------- События ---------- */
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-page],[data-act],[data-lang]');if(!b)return;
+ if(b.dataset.lang!==undefined){L=+b.dataset.lang;localStorage.setItem('tnc_lang',L);render();return}
+ if(b.dataset.page){S.page=b.dataset.page;S.report=null;window.scrollTo(0,0);load();return}
+ const a=b.dataset.act,id=b.dataset.id,o=S.org;
+ switch(a){
+  case'theme':S.dark=!S.dark;localStorage.setItem('tnc_dark',S.dark?'1':'0');render();break;
+  case'signout':signOut();break;
+  case'otp-back':S.otpSent=false;render();break;
+  case'approve':act('decide_membership',{p_user:id,p_org:o,p_approve:true},t('approve')+' ✓');break;
+  case'reject':act('decide_membership',{p_user:id,p_org:o,p_approve:false},t('reject')+' ✓');break;
+  case'copy-link':try{await navigator.clipboard.writeText(b.dataset.v);toast(t('copy')+' ✓')}catch(_){toast(b.dataset.v)}break;
+  case'regen':if(confirm(t('regenQ')))act('coord_invite_code',{p_org:o,p_regenerate:true},t('regen')+' ✓');break;
+  case'new-quest':{const d=$('#dlg-quest');d.showModal();const inp=d.querySelector('[name=starts_at]');const tm=new Date(Date.now()+864e5);tm.setMinutes(0,0,0);tm.setHours(10);inp.value=new Date(tm-tm.getTimezoneOffset()*6e4).toISOString().slice(0,16);d.querySelector('[name=title]').focus();break}
+  case'close-dlg':b.closest('dialog').close();break;
+  case'cancel-quest':if(confirm(t('cancelQ')))act('coord_cancel_quest',{p_quest:id},t('cancelled'));break;
+  case'rtab':S.rtab=b.dataset.v;S.report=null;load();break;
+  case'open-report':S.report=id;load();break;
+  case'report-back':S.report=null;load();break;
+  case'approve-report':{const id=S.report;S.report=null;act('approve_shift',{p_report:id,p_approve:true},t('hoursDone'));break}
+  case'return-report':openNote('return');break;
+  case'penalty':openNote('penalty');break;
+  case'remove':if(confirm(t('removeQ')))act('coord_remove_member',{p_org:o,p_user:id},t('remove')+' ✓');break;
+  case'abuse':act('coord_resolve_abuse',{p_org:o,p_id:+id,p_delete_message:!!b.dataset.del,p_remove_user:!!b.dataset.rm},t('resolved'));break;
+ }});
+function openNote(kind){const d=$('#dlg-note');d.dataset.kind=kind;$('#dn-t').textContent=kind==='penalty'?t('penalty'):t('returnR');$('#dn-b').textContent=kind==='penalty'?t('penaltyB'):'';$('#dn-amt-l').style.display=kind==='penalty'?'':'none';$('#dn-note').value='';d.showModal();$('#dn-note').focus()}
+document.addEventListener('change',e=>{const el=e.target,a=el.dataset.act;
+ if(el.id==='orgsel'){S.org=el.value;S.orgName=S.orgs.find(o=>o.id===S.org).name;load();return}
+ if(a==='senior')act('coord_assign_senior',{p_team:el.dataset.team,p_user:el.value||null},t('senior')+' ✓');
+ if(a==='role')act('coord_set_role',{p_org:S.org,p_user:el.dataset.id,p_role:el.value},t('role')+' ✓')});
+document.addEventListener('close',()=>{if(S.deferred){S.deferred=false;setTimeout(render)}},true);
+document.addEventListener('input',e=>{if(e.target.id==='msearch'){S.q=e.target.value;render()}});
+document.addEventListener('submit',async e=>{const f=e.target;
+ if(f.id==='f-otp'){e.preventDefault();S.email=$('#em').value.trim();try{await http('/auth/v1/otp',{method:'POST',body:JSON.stringify({email:S.email,create_user:false})});S.otpSent=true;render();$('#otp').focus()}catch(_){toast(t('err'))}}
+ if(f.id==='f-verify'){e.preventDefault();try{const j=await http('/auth/v1/verify',{method:'POST',body:JSON.stringify({type:'email',email:S.email,token:$('#otp').value.trim()})});saveSession(j);S.otpSent=false;await start()}catch(_){toast(t('err'))}}
+ if(f.id==='f-quest'){e.preventDefault();const v=Object.fromEntries(new FormData(f));
+  const row={org_id:S.org,created_by:me(),title:v.title.trim(),description:v.description.trim(),difficulty:v.difficulty,starts_at:new Date(v.starts_at).toISOString(),duration_min:Math.round(+v.hours*60),capacity:+v.capacity,address:v.address.trim(),lat:+v.lat,lng:+v.lng,status:'published'};
+  try{await insertQuest(row);f.closest('dialog').close();toast(t('created'));load()}catch(err){toast(t('err')+' · '+err.message)}}
+ if(f.id==='f-post'){e.preventDefault();const body=$('#post').value.trim();if(body)act('coord_post',{p_org:S.org,p_body:body},t('sent'))}
+ if(f.id==='f-note'){e.preventDefault();const d=f.closest('dialog'),note=$('#dn-note').value.trim();d.close();
+  if(d.dataset.kind==='penalty')act('penalize',{p_report:S.report,p_tz:+$('#dn-amt').value,p_note:note},t('penalized'));
+  else{await act('approve_shift',{p_report:S.report,p_approve:false,p_note:note},t('returned'));S.report=null;load()}}});
+
+async function start(){
+ if(!DEMO&&!S.token){render();return}
+ try{S.orgs=await rpc('coord_orgs');}catch(e){toast(t('err'));S.orgs=[]}
+ if(!S.orgs.length){S.notCoord=true;S.token=null;sessionStorage.removeItem('tnc_session');render();return}
+ S.org=S.orgs[0].id;S.orgName=S.orgs[0].name;load('overview')}
+start();
+</script>
+</body>
+</html>
