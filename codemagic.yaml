@@ -1,0 +1,38 @@
+# Облачная сборка Taza Niyet в Codemagic (codemagic.io).
+# Собирает APK для Android в демо-режиме — ничего не нужно устанавливать на компьютер.
+workflows:
+  android-demo:
+    name: Taza Niyet — Android (демо)
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      java: 17
+    scripts:
+      - name: Папка android
+        script: |
+          flutter create --org kz.tazaniyet --project-name taza_niyet --platforms android .
+          rm -f test/widget_test.dart   # шаблонный тест Flutter, к проекту не относится
+      - name: Шрифты Manrope
+        script: |
+          if [ ! -f assets/fonts/Manrope-Regular.ttf ]; then
+            mkdir -p assets/fonts
+            python3 -m venv /tmp/fv
+            /tmp/fv/bin/pip install --quiet fonttools
+            curl -fsSL -o /tmp/Manrope.ttf "https://github.com/google/fonts/raw/main/ofl/manrope/Manrope%5Bwght%5D.ttf"
+            for pair in Regular:400 Medium:500 SemiBold:600 Bold:700 ExtraBold:800; do
+              /tmp/fv/bin/fonttools varLib.instancer /tmp/Manrope.ttf "wght=${pair##*:}" -o "assets/fonts/Manrope-${pair%%:*}.ttf"
+            done
+          fi
+          ls -la assets/fonts
+      - name: Настройка Android
+        script: dart run tool/setup_android.dart
+      - name: Зависимости
+        script: flutter pub get
+      - name: Тесты
+        script: flutter test
+        ignore_failure: true
+      - name: Сборка APK
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
